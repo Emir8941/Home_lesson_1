@@ -16,9 +16,10 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.home_lesson_1.R;
-import com.example.home_lesson_1.adapter.FirstFragmentAdapter;
 import com.example.home_lesson_1.databinding.FragmentFirstBinding;
 import com.example.home_lesson_1.model.FirstModel;
+import com.example.home_lesson_1.ui.adapter.FirstFragmentAdapter;
+import com.example.home_lesson_1.ui.fragment.onClick.OnItemClick;
 
 import java.util.ArrayList;
 
@@ -46,33 +47,26 @@ public class FirstFragment extends Fragment {
     }
 
     private void detail() {
-        adapter.setOnItemClick(position -> {
-            Bundle bundle = new Bundle();
-            FirstModel model = new FirstModel(
-                    adapter.list.get(position).getName(),
-                    adapter.list.get(position).getDescription(),
-                    adapter.list.get(position).getImage()
-            );
-            bundle.putSerializable("key", model);
-            getParentFragmentManager().setFragmentResult("key2", bundle);
-            close();
+        adapter.setOnItemClick(model -> {
+            FirstViewModel viewModel = new ViewModelProvider(FirstFragment.this.requireActivity())
+                    .get(FirstViewModel.class);
+            viewModel.setSelected(model);
+            FirstFragment.this.close();
         });
     }
 
     private void close() {
-        NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
+        NavController navController = Navigation.findNavController(requireActivity(),
+                R.id.nav_host_fragment);
         navController.navigate(R.id.detailsFragment);
     }
 
     private void setUpObserve() {
-        viewModel.data.observe(getViewLifecycleOwner(), new Observer<ArrayList<FirstModel>>() {
-            @Override
-            public void onChanged(ArrayList<FirstModel> firstModels) {
-                binding.rV.setVisibility(View.VISIBLE);
-                adapter.setBooks(firstModels);
-                binding.button.setVisibility(View.GONE);
-                Log.e("anime", "onChanged: ");
-            }
+        viewModel.data.observe(getViewLifecycleOwner(), firstModels -> {
+            binding.rV.setVisibility(View.VISIBLE);
+            adapter.setBooks(firstModels);
+            binding.button.setVisibility(View.GONE);
+            Log.e("anime", "onChanged: ");
         });
     }
 

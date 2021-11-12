@@ -10,11 +10,15 @@ import java.util.ArrayList;
 
 public class FirstViewModel extends ViewModel {
     public MutableLiveData<ArrayList<FirstModel>> data = new MutableLiveData<>();
-    int pos;
+    private MutableLiveData<FirstModel> selected = new MutableLiveData<>();
     ArrayList<FirstModel> list = new ArrayList<>();
 
-    public void onSetPos(int pos){
-        this.pos=pos;
+    public void setSelected(FirstModel model){
+        selected.setValue(model);
+    }
+
+    public MutableLiveData<FirstModel> getSelected(){
+        return selected;
     }
 
     public void getList(){

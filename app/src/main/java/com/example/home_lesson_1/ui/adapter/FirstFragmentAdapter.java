@@ -1,4 +1,4 @@
-package com.example.home_lesson_1.adapter;
+package com.example.home_lesson_1.ui.adapter;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
@@ -58,7 +58,7 @@ public class FirstFragmentAdapter extends RecyclerView.Adapter<FirstFragmentAdap
             binding.title.setText(model.getName());
             binding.taskIm.setImageResource(model.getImage());
             itemView.setOnClickListener(view -> {
-                itemClick.onClick(getAdapterPosition());
+                itemClick.onClick(model);
             });
         }
     }
