@@ -1,13 +1,14 @@
-package com.example.home_lesson_1.model;
+package com.example.home_work_1.model;
 
 import java.io.Serializable;
 
-public class FirstModel implements Serializable {
+public class BookModel implements Serializable {
+
     private String name;
     private String Description;
     private int image;
 
-    public FirstModel(String name, String description, int image) {
+    public BookModel(String name, String description, int image) {
         this.name = name;
         Description = description;
         this.image = image;

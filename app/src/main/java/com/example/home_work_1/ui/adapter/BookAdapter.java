@@ -1,4 +1,4 @@
-package com.example.home_lesson_1.ui.adapter;
+package com.example.home_work_1.ui.adapter;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
@@ -7,24 +7,24 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.home_lesson_1.databinding.ItemTaskBinding;
-import com.example.home_lesson_1.model.FirstModel;
-import com.example.home_lesson_1.ui.fragment.onClick.OnItemClick;
+import com.example.home_work_1.databinding.ItemTaskBinding;
+import com.example.home_work_1.model.BookModel;
+import com.example.home_work_1.ui.fragment.onClick.OnItemClick;
 
 import java.util.ArrayList;
 
-public class FirstFragmentAdapter extends RecyclerView.Adapter<FirstFragmentAdapter.MyViewHolder> {
+public class BookAdapter extends RecyclerView.Adapter<BookAdapter.MyViewHolder> {
 
-    public ArrayList<FirstModel> list = new ArrayList<>();
-    OnItemClick itemClick;
+    public ArrayList<BookModel> list = new ArrayList<>();
+    private OnItemClick itemClick;
 
-    public void setOnItemClick(OnItemClick itemClick){
+    public void setOnItemClick(OnItemClick itemClick) {
         this.itemClick = itemClick;
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public void  setBooks(ArrayList<FirstModel> animeBooks){
-        list = animeBooks;
+    public void setBooks(ArrayList<BookModel> list) {
+        this.list.addAll(list);
         notifyDataSetChanged();
     }
 
@@ -47,16 +47,16 @@ public class FirstFragmentAdapter extends RecyclerView.Adapter<FirstFragmentAdap
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        ItemTaskBinding binding;
+        private ItemTaskBinding binding;
 
         public MyViewHolder(@NonNull ItemTaskBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
 
-        public void onBind(FirstModel model) {
-            binding.title.setText(model.getName());
-            binding.taskIm.setImageResource(model.getImage());
+        public void onBind(BookModel model) {
+            binding.itemName.setText(model.getName());
+            binding.itemImage.setImageResource(model.getImage());
             itemView.setOnClickListener(view -> {
                 itemClick.onClick(model);
             });

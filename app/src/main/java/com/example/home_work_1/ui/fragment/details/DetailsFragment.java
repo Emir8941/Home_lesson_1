@@ -1,7 +1,6 @@
-package com.example.home_lesson_1.ui.fragment.details;
+package com.example.home_work_1.ui.fragment.details;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,13 +8,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.home_lesson_1.databinding.FragmentDetailsBinding;
-import com.example.home_lesson_1.model.FirstModel;
-import com.example.home_lesson_1.ui.fragment.firstFragment.FirstViewModel;
+import com.example.home_work_1.databinding.FragmentDetailsBinding;
+import com.example.home_work_1.ui.fragment.book.BookViewModel;
 
 public class DetailsFragment extends Fragment {
 
@@ -31,15 +27,15 @@ public class DetailsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initTitle();
+        getData();
     }
 
-    private void initTitle() {
-        FirstViewModel viewModel = new ViewModelProvider(requireActivity()).get(FirstViewModel.class);
+    private void getData() {
+        BookViewModel viewModel = new ViewModelProvider(requireActivity()).get(BookViewModel.class);
         viewModel.getSelected().observe(getViewLifecycleOwner(), firstModel -> {
-            binding.name.setText(firstModel.getName());
-            binding.lor.setText(firstModel.getDescription());
-            binding.taskIm.setImageResource(firstModel.getImage());
+            binding.bookName.setText(firstModel.getName());
+            binding.bookDescription.setText(firstModel.getDescription());
+            binding.bookImg.setImageResource(firstModel.getImage());
         });
     }
 }
