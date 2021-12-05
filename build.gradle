@@ -6,6 +6,7 @@ buildscript {
     }
     dependencies {
         classpath "com.android.tools.build:gradle:7.0.3"
+        //SafeArgs
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
     }
 }
